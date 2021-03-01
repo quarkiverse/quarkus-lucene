@@ -1,5 +1,5 @@
-name: quarkiverse-project
-title: Quarkiverse <YOUR_PROJECT>
+name: quarkus-lucene
+title: Quarkus Lucene
 version: dev
 nav:
   - modules/ROOT/nav.adoc
