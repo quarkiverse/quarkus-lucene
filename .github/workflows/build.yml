@@ -51,3 +51,7 @@ jobs:
     - name: Build with Maven
       run: mvn -B formatter:validate verify --file pom.xml
 
+    - name: Build - Native
+      run: mvn -B verify -Pnative --file integration-test/pom.xml
+
+
