@@ -8,7 +8,7 @@
    </parent>
    <groupId>io.quarkiverse.lucene</groupId>
    <artifactId>quarkus-lucene-parent</artifactId>
-   <version>0.1</version>
+   <version>0.2-SNAPSHOT</version>
    <packaging>pom</packaging>
    <name>Quarkus - Lucene - Parent</name>
    <modules>
@@ -75,8 +75,4 @@
          </modules>
       </profile>
    </profiles>
-
-  <scm>
-    <tag>0.1</tag>
-  </scm>
 </project>
