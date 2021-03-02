@@ -30,6 +30,8 @@ public final class AttributeCreator {
             return new BoostAttributeImpl();
         } else if (attClass == KeywordAttribute.class) {
             return new KeywordAttributeImpl();
+        } else if (attClass == PayloadAttribute.class) {
+            return new PayloadAttributeImpl();
         }
         throw new UnsupportedOperationException(
                 String.format("Attribute class '%s' not supported in the image", attClass));
