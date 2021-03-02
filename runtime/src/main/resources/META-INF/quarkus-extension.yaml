@@ -1,0 +1,11 @@
+name: "Lucene"
+metadata:
+  keywords:
+    - "search"
+    - "query"
+    - "index"
+    - "full-text"
+  guide: "https://github.com/quarkiverse/quarkus-lucene"
+  categories:
+    - "search"
+  status: "preview"

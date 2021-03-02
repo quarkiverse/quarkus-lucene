@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <modelVersion>4.0.0</modelVersion>
+   <parent>
+      <groupId>io.quarkiverse.lucene</groupId>
+      <artifactId>quarkus-lucene-parent</artifactId>
+      <version>0.1-SNAPSHOT</version>
+   </parent>
+   <artifactId>quarkus-lucene</artifactId>
+   <name>Quarkus - Lucene - Runtime</name>
+   <description>Add full-text search capabilities to your application with Apache Lucene.</description>
+
+   <dependencies>
+      <!-- Quarkus dependencies -->
+      <dependency>
+         <groupId>io.quarkus</groupId>
+         <artifactId>quarkus-arc</artifactId>
+      </dependency>
+
+      <!--GraalVM -->
+      <dependency>
+         <groupId>org.graalvm.nativeimage</groupId>
+         <artifactId>svm</artifactId>
+      </dependency>
+
+      <!-- Lucene dependencies -->
+      <dependency>
+         <groupId>org.apache.lucene</groupId>
+         <artifactId>lucene-core</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.lucene</groupId>
+         <artifactId>lucene-analyzers-common</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.lucene</groupId>
+         <artifactId>lucene-queryparser</artifactId>
+      </dependency>
+   </dependencies>
+
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-bootstrap-maven-plugin</artifactId>
+            <version>${quarkus.version}</version>
+            <executions>
+               <execution>
+                  <goals>
+                     <goal>extension-descriptor</goal>
+                  </goals>
+                  <phase>compile</phase>
+                  <configuration>
+                     <deployment>${project.groupId}:${project.artifactId}-deployment:${project.version}
+                     </deployment>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+               <annotationProcessorPaths>
+                  <path>
+                     <groupId>io.quarkus</groupId>
+                     <artifactId>quarkus-extension-processor</artifactId>
+                     <version>${quarkus.version}</version>
+                  </path>
+               </annotationProcessorPaths>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
+</project>
