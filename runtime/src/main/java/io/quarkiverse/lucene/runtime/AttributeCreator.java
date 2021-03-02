@@ -1,18 +1,6 @@
 package io.quarkiverse.lucene.runtime;
 
-import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
-import org.apache.lucene.analysis.tokenattributes.CharTermAttributeImpl;
-import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
-import org.apache.lucene.analysis.tokenattributes.OffsetAttributeImpl;
-import org.apache.lucene.analysis.tokenattributes.PackedTokenAttributeImpl;
-import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
-import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttributeImpl;
-import org.apache.lucene.analysis.tokenattributes.PositionLengthAttribute;
-import org.apache.lucene.analysis.tokenattributes.PositionLengthAttributeImpl;
-import org.apache.lucene.analysis.tokenattributes.TermFrequencyAttribute;
-import org.apache.lucene.analysis.tokenattributes.TermFrequencyAttributeImpl;
-import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
-import org.apache.lucene.analysis.tokenattributes.TypeAttributeImpl;
+import org.apache.lucene.analysis.tokenattributes.*;
 import org.apache.lucene.search.BoostAttribute;
 import org.apache.lucene.search.BoostAttributeImpl;
 import org.apache.lucene.util.Attribute;
@@ -40,6 +28,8 @@ public final class AttributeCreator {
             return new PositionLengthAttributeImpl();
         } else if (attClass == BoostAttribute.class) {
             return new BoostAttributeImpl();
+        } else if (attClass == KeywordAttribute.class) {
+            return new KeywordAttributeImpl();
         }
         throw new UnsupportedOperationException(
                 String.format("Attribute class '%s' not supported in the image", attClass));
