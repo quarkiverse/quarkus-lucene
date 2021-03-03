@@ -13,6 +13,10 @@ import org.apache.lucene.analysis.tokenattributes.TermFrequencyAttribute;
 import org.apache.lucene.analysis.tokenattributes.TermFrequencyAttributeImpl;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttributeImpl;
+import org.apache.lucene.analysis.tokenattributes.KeywordAttribute;
+import org.apache.lucene.analysis.tokenattributes.KeywordAttributeImpl;
+import org.apache.lucene.analysis.tokenattributes.PayloadAttribute;
+import org.apache.lucene.analysis.tokenattributes.PayloadAttributeImpl;
 import org.apache.lucene.search.BoostAttribute;
 import org.apache.lucene.search.BoostAttributeImpl;
 import org.apache.lucene.util.Attribute;
@@ -40,6 +44,10 @@ public final class AttributeCreator {
             return new PositionLengthAttributeImpl();
         } else if (attClass == BoostAttribute.class) {
             return new BoostAttributeImpl();
+        } else if (attClass == KeywordAttribute.class) {
+            return new KeywordAttributeImpl();
+        } else if (attClass == PayloadAttribute.class) {
+            return new PayloadAttributeImpl();
         }
         throw new UnsupportedOperationException(
                 String.format("Attribute class '%s' not supported in the image", attClass));
