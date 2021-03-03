@@ -12,8 +12,6 @@ import java.util.List;
 import org.apache.lucene.store.ByteBuffersDirectory;
 import org.apache.lucene.store.MMapDirectory;
 import org.apache.lucene.store.NIOFSDirectory;
-import org.apache.lucene.store.RAMDirectory;
-import org.apache.lucene.store.SimpleFSDirectory;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -25,8 +23,9 @@ import io.restassured.RestAssured;
 public class LuceneFunctionalityTest {
 
     @Test
+    @SuppressWarnings("deprecation")
     public void testRAMDirectory() {
-        testDirectory(RAMDirectory.class);
+        testDirectory(org.apache.lucene.store.RAMDirectory.class);
     }
 
     @Test
@@ -35,8 +34,9 @@ public class LuceneFunctionalityTest {
     }
 
     @Test
+    @SuppressWarnings("deprecation")
     public void testSimpleFSDirectory() {
-        testDirectory(SimpleFSDirectory.class);
+        testDirectory(org.apache.lucene.store.SimpleFSDirectory.class);
     }
 
     @Test

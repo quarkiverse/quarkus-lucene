@@ -13,6 +13,7 @@ import com.oracle.svm.core.annotate.TargetClass;
 public final class AttributeFactoryReplacement {
 
     @Substitute
+    @SuppressWarnings("unchecked")
     public static <A extends AttributeImpl> AttributeFactory getStaticImplementation(AttributeFactory delegate,
             Class<A> clazz) {
         return new StaticImplementationAttributeFactory<A>(delegate, clazz) {

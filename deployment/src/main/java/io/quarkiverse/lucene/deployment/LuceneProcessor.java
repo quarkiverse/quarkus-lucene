@@ -1,7 +1,5 @@
 package io.quarkiverse.lucene.deployment;
 
-import javax.inject.Inject;
-
 import org.apache.lucene.analysis.charfilter.MappingCharFilterFactory;
 import org.apache.lucene.analysis.core.KeywordTokenizerFactory;
 import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
@@ -26,8 +24,6 @@ import org.apache.lucene.analysis.util.CharFilterFactory;
 import org.apache.lucene.store.ByteBuffersDirectory;
 import org.apache.lucene.store.MMapDirectory;
 import org.apache.lucene.store.NIOFSDirectory;
-import org.apache.lucene.store.RAMDirectory;
-import org.apache.lucene.store.SimpleFSDirectory;
 import org.tartarus.snowball.ext.EnglishStemmer;
 
 import io.quarkus.deployment.annotations.BuildProducer;
@@ -37,9 +33,6 @@ import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
 
 class LuceneProcessor {
 
-    @Inject
-    BuildProducer<ReflectiveClassBuildItem> reflectiveClass;
-
     private static final String FEATURE = "lucene";
 
     @BuildStep
@@ -48,45 +41,47 @@ class LuceneProcessor {
     }
 
     @BuildStep
+    @SuppressWarnings("deprecation")
     void commonTokenizerReflection(BuildProducer<ReflectiveClassBuildItem> reflectiveClass) {
-        addCtorReflection(StandardTokenizerFactory.class);
-        addCtorReflection(LowerCaseFilterFactory.class);
-        addCtorReflection(EdgeNGramTokenizerFactory.class);
-        addCtorReflection(PathHierarchyTokenizerFactory.class);
-        addCtorReflection(WhitespaceTokenizerFactory.class);
-        addCtorReflection(PatternTokenizerFactory.class);
-        addCtorReflection(KeywordTokenizerFactory.class);
-        addCtorReflection(NGramTokenizerFactory.class);
+        addCtorReflection(reflectiveClass, StandardTokenizerFactory.class);
+        addCtorReflection(reflectiveClass, LowerCaseFilterFactory.class);
+        addCtorReflection(reflectiveClass, EdgeNGramTokenizerFactory.class);
+        addCtorReflection(reflectiveClass, PathHierarchyTokenizerFactory.class);
+        addCtorReflection(reflectiveClass, WhitespaceTokenizerFactory.class);
+        addCtorReflection(reflectiveClass, PatternTokenizerFactory.class);
+        addCtorReflection(reflectiveClass, KeywordTokenizerFactory.class);
+        addCtorReflection(reflectiveClass, NGramTokenizerFactory.class);
         // Filter Factories
-        addCtorReflection(EdgeNGramFilterFactory.class);
-        addCtorReflection(LowerCaseFilterFactory.class);
-        addCtorReflection(ShingleFilterFactory.class);
-        addCtorReflection(StopFilterFactory.class);
-        addCtorReflection(SynonymGraphFilterFactory.class);
-        addCtorReflection(SnowballPorterFilterFactory.class);
-        addCtorReflection(UpperCaseFilterFactory.class);
-        addCtorReflection(PatternReplaceFilterFactory.class);
-        addCtorReflection(PorterStemFilterFactory.class);
-        addCtorReflection(NGramFilterFactory.class);
-        addCtorReflection(ShingleFilterFactory.class);
-        addCtorReflection(WordDelimiterGraphFilterFactory.class);
+        addCtorReflection(reflectiveClass, EdgeNGramFilterFactory.class);
+        addCtorReflection(reflectiveClass, LowerCaseFilterFactory.class);
+        addCtorReflection(reflectiveClass, ShingleFilterFactory.class);
+        addCtorReflection(reflectiveClass, StopFilterFactory.class);
+        addCtorReflection(reflectiveClass, SynonymGraphFilterFactory.class);
+        addCtorReflection(reflectiveClass, SnowballPorterFilterFactory.class);
+        addCtorReflection(reflectiveClass, UpperCaseFilterFactory.class);
+        addCtorReflection(reflectiveClass, PatternReplaceFilterFactory.class);
+        addCtorReflection(reflectiveClass, PorterStemFilterFactory.class);
+        addCtorReflection(reflectiveClass, NGramFilterFactory.class);
+        addCtorReflection(reflectiveClass, ShingleFilterFactory.class);
+        addCtorReflection(reflectiveClass, WordDelimiterGraphFilterFactory.class);
 
         // Stemmers
-        addCtorReflection(EnglishStemmer.class);
+        addCtorReflection(reflectiveClass, EnglishStemmer.class);
         // Char filter factories
-        addCtorReflection(CharFilterFactory.class);
-        addCtorReflection(MappingCharFilterFactory.class);
-        addCtorReflection(PatternReplaceCharFilterFactory.class);
+        addCtorReflection(reflectiveClass, CharFilterFactory.class);
+        addCtorReflection(reflectiveClass, MappingCharFilterFactory.class);
+        addCtorReflection(reflectiveClass, PatternReplaceCharFilterFactory.class);
 
         // Directories
-        addCtorReflection(MMapDirectory.class);
-        addCtorReflection(ByteBuffersDirectory.class);
-        addCtorReflection(RAMDirectory.class);
-        addCtorReflection(SimpleFSDirectory.class);
-        addCtorReflection(NIOFSDirectory.class);
+        addCtorReflection(reflectiveClass, MMapDirectory.class);
+        addCtorReflection(reflectiveClass, ByteBuffersDirectory.class);
+        addCtorReflection(reflectiveClass, NIOFSDirectory.class);
+        // Include deprecated directories for now
+        addCtorReflection(reflectiveClass, org.apache.lucene.store.RAMDirectory.class);
+        addCtorReflection(reflectiveClass, org.apache.lucene.store.SimpleFSDirectory.class);
     }
 
-    private void addCtorReflection(Class<?> clazz) {
+    private void addCtorReflection(BuildProducer<ReflectiveClassBuildItem> reflectiveClass, Class<?> clazz) {
         reflectiveClass.produce(new ReflectiveClassBuildItem(true, false, false, clazz));
     }
 }
