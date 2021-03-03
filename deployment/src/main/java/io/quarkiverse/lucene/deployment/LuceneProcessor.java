@@ -8,11 +8,15 @@ import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
 import org.apache.lucene.analysis.core.StopFilterFactory;
 import org.apache.lucene.analysis.core.UpperCaseFilterFactory;
 import org.apache.lucene.analysis.core.WhitespaceTokenizerFactory;
+import org.apache.lucene.analysis.en.PorterStemFilterFactory;
+import org.apache.lucene.analysis.miscellaneous.WordDelimiterGraphFilterFactory;
 import org.apache.lucene.analysis.ngram.EdgeNGramFilterFactory;
 import org.apache.lucene.analysis.ngram.EdgeNGramTokenizerFactory;
 import org.apache.lucene.analysis.ngram.NGramFilterFactory;
+import org.apache.lucene.analysis.ngram.NGramTokenizerFactory;
 import org.apache.lucene.analysis.path.PathHierarchyTokenizerFactory;
 import org.apache.lucene.analysis.pattern.PatternReplaceCharFilterFactory;
+import org.apache.lucene.analysis.pattern.PatternReplaceFilterFactory;
 import org.apache.lucene.analysis.pattern.PatternTokenizerFactory;
 import org.apache.lucene.analysis.shingle.ShingleFilterFactory;
 import org.apache.lucene.analysis.snowball.SnowballPorterFilterFactory;
@@ -52,7 +56,7 @@ class LuceneProcessor {
         addCtorReflection(WhitespaceTokenizerFactory.class);
         addCtorReflection(PatternTokenizerFactory.class);
         addCtorReflection(KeywordTokenizerFactory.class);
-        addCtorReflection(NGramFilterFactory.class);
+        addCtorReflection(NGramTokenizerFactory.class);
         // Filter Factories
         addCtorReflection(EdgeNGramFilterFactory.class);
         addCtorReflection(LowerCaseFilterFactory.class);
@@ -61,6 +65,12 @@ class LuceneProcessor {
         addCtorReflection(SynonymGraphFilterFactory.class);
         addCtorReflection(SnowballPorterFilterFactory.class);
         addCtorReflection(UpperCaseFilterFactory.class);
+        addCtorReflection(PatternReplaceFilterFactory.class);
+        addCtorReflection(PorterStemFilterFactory.class);
+        addCtorReflection(NGramFilterFactory.class);
+        addCtorReflection(ShingleFilterFactory.class);
+        addCtorReflection(WordDelimiterGraphFilterFactory.class);
+
         // Stemmers
         addCtorReflection(EnglishStemmer.class);
         // Char filter factories
