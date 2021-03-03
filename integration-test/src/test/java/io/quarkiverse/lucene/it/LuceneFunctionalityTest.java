@@ -55,9 +55,9 @@ public class LuceneFunctionalityTest {
 
         createDirectory(directoryName, ByteBuffersDirectory.class);
 
-        Person batman = new PersonBuilder().withName("Bruce Wayne").withAge(45).withMetadata("abcd").withHeight(1.8f)
+        Person batman = new PersonBuilder().withName("Bruce Wayne").withAge(45).withMetadata("bats").withHeight(1.8f)
                 .withLatitude(54.2).withLongitude(0.02).getPerson();
-        Person hulk = new PersonBuilder().withName("Bruce Banner").withAge(42).withMetadata("abce").withHeight(2.1f)
+        Person hulk = new PersonBuilder().withName("Bruce Banner").withAge(42).withMetadata("marvel comics").withHeight(2.1f)
                 .withLatitude(32.2).withLongitude(-0.02).getPerson();
 
         indexPersons(batman, hulk);
@@ -67,6 +67,7 @@ public class LuceneFunctionalityTest {
         testQuery("name:b*", "Bruce Wayne", "Bruce Banner");
         testQuery("age:[40 TO 43]", "Bruce Banner");
         testQuery("name:bru* AND age:[44 TO 46]", "Bruce Wayne");
+        testQuery("metadata:bat", "Bruce Wayne");
     }
 
     private void testQuery(String query, String... expectedNames) {

@@ -15,6 +15,7 @@ import org.apache.lucene.analysis.path.PathHierarchyTokenizerFactory;
 import org.apache.lucene.analysis.pattern.PatternReplaceCharFilterFactory;
 import org.apache.lucene.analysis.pattern.PatternTokenizerFactory;
 import org.apache.lucene.analysis.shingle.ShingleFilterFactory;
+import org.apache.lucene.analysis.snowball.SnowballPorterFilterFactory;
 import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
 import org.apache.lucene.analysis.synonym.SynonymGraphFilterFactory;
 import org.apache.lucene.analysis.util.CharFilterFactory;
@@ -23,6 +24,7 @@ import org.apache.lucene.store.MMapDirectory;
 import org.apache.lucene.store.NIOFSDirectory;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.store.SimpleFSDirectory;
+import org.tartarus.snowball.ext.EnglishStemmer;
 
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
@@ -57,7 +59,10 @@ class LuceneProcessor {
         addCtorReflection(ShingleFilterFactory.class);
         addCtorReflection(StopFilterFactory.class);
         addCtorReflection(SynonymGraphFilterFactory.class);
+        addCtorReflection(SnowballPorterFilterFactory.class);
         addCtorReflection(UpperCaseFilterFactory.class);
+        // Stemmers
+        addCtorReflection(EnglishStemmer.class);
         // Char filter factories
         addCtorReflection(CharFilterFactory.class);
         addCtorReflection(MappingCharFilterFactory.class);

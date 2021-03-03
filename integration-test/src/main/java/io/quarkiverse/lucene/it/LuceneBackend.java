@@ -57,8 +57,8 @@ public class LuceneBackend {
     }
 
     public void indexPerson(Person person, Directory directory) throws IOException {
-        Analyzer standardAnalyzer = Person.getAnalyzerPerField();
-        IndexWriterConfig config = new IndexWriterConfig(standardAnalyzer);
+        Analyzer perFieldAnalyzer = Person.getAnalyzerPerField();
+        IndexWriterConfig config = new IndexWriterConfig(perFieldAnalyzer);
         IndexWriter writer = new IndexWriter(directory, config);
         writer.addDocument(person.toDocument());
         writer.close();

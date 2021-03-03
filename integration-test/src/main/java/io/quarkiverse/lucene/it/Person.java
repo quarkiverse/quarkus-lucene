@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.core.KeywordAnalyzer;
 import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
 import org.apache.lucene.analysis.core.StopFilterFactory;
 import org.apache.lucene.analysis.custom.CustomAnalyzer;
 import org.apache.lucene.analysis.miscellaneous.PerFieldAnalyzerWrapper;
+import org.apache.lucene.analysis.snowball.SnowballPorterFilterFactory;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
 import org.apache.lucene.document.Document;
@@ -18,7 +18,6 @@ import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.document.FloatPoint;
 import org.apache.lucene.document.IntPoint;
 import org.apache.lucene.document.LatLonDocValuesField;
-import org.apache.lucene.document.StoredField;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
 
@@ -41,7 +40,10 @@ public class Person {
                 .addTokenFilter(StopFilterFactory.class, "ignoreCase", "false")
                 .build();
         analyzerMap.put("name", custom);
-        analyzerMap.put("metadata", new KeywordAnalyzer());
+        CustomAnalyzer metadataAnalyzer = CustomAnalyzer.builder().withTokenizer(StandardTokenizerFactory.class)
+                .addTokenFilter(SnowballPorterFilterFactory.class)
+                .build();
+        analyzerMap.put("metadata", metadataAnalyzer);
         return new PerFieldAnalyzerWrapper(new StandardAnalyzer(), analyzerMap);
     }
 
@@ -60,7 +62,7 @@ public class Person {
             document.add(new StringField("company", company, Store.YES));
         }
         if (metadata != null) {
-            document.add(new StoredField("metadata", metadata));
+            document.add(new TextField("metadata", metadata, Store.YES));
         }
         if (height != null) {
             document.add(new FloatPoint("height", height));
