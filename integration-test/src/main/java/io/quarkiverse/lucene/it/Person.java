@@ -1,5 +1,7 @@
 package io.quarkiverse.lucene.it;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,12 +16,14 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.DoublePoint;
+import org.apache.lucene.document.Field;
 import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.document.FloatPoint;
 import org.apache.lucene.document.IntPoint;
 import org.apache.lucene.document.LatLonDocValuesField;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
+import org.apache.lucene.util.BytesRef;
 
 public class Person {
 
@@ -63,6 +67,9 @@ public class Person {
         }
         if (metadata != null) {
             document.add(new TextField("metadata", metadata, Store.YES));
+            BytesRef br = new BytesRef(metadata.getBytes(UTF_8));
+            Field binaryField = new StringField("metadata-binary", br, Field.Store.YES);
+            document.add(binaryField);
         }
         if (height != null) {
             document.add(new FloatPoint("height", height));
