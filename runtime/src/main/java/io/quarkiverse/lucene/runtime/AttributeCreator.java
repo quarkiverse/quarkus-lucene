@@ -1,6 +1,7 @@
 package io.quarkiverse.lucene.runtime;
 
 import org.apache.lucene.analysis.miscellaneous.ConcatenateGraphFilter.BytesRefBuilderTermAttribute;
+import org.apache.lucene.analysis.miscellaneous.ConcatenateGraphFilter.BytesRefBuilderTermAttributeImpl;
 import org.apache.lucene.analysis.tokenattributes.BytesTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.BytesTermAttributeImpl;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
@@ -62,7 +63,7 @@ public final class AttributeCreator {
         } else if (attClass == MaxNonCompetitiveBoostAttribute.class) {
             return new MaxNonCompetitiveBoostAttributeImpl();
         } else if (attClass == BytesRefBuilderTermAttribute.class) {
-            return new BytesTermAttributeImpl();
+            return new BytesRefBuilderTermAttributeImpl();
         }
         throw new UnsupportedOperationException(
                 String.format("Attribute class '%s' not supported in the image", attClass));
