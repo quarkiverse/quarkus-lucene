@@ -23,7 +23,7 @@
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
       <quarkus.version>2.2.1.Final</quarkus.version>
-      <lucene.version>8.9.0</lucene.version>
+      <lucene.version>8.10.0</lucene.version>
    </properties>
    <dependencyManagement>
       <dependencies>
