@@ -1,6 +1,6 @@
 # Lucene extension for Quarkus
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [Apache Lucene](https://lucene.apache.org/) is a Java library providing powerful indexing and search features, as well as spellchecking, hit highlighting and advanced analysis/tokenization capabilities. 
@@ -51,9 +51,12 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="https://github.com/gustavonalle"><img src="https://avatars.githubusercontent.com/u/440989?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gustavo</b></sub></a><br /><a href="https://github.com/quarkiverse/quarkus-lucene/commits?author=gustavonalle" title="Code">💻</a> <a href="#maintenance-gustavonalle" title="Maintenance">🚧</a></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/gustavonalle"><img src="https://avatars.githubusercontent.com/u/440989?v=4?s=100" width="100px;" alt="Gustavo"/><br /><sub><b>Gustavo</b></sub></a><br /><a href="https://github.com/quarkiverse/quarkus-lucene/commits?author=gustavonalle" title="Code">💻</a> <a href="#maintenance-gustavonalle" title="Maintenance">🚧</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.jocas.lt"><img src="https://avatars.githubusercontent.com/u/230044?v=4?s=100" width="100px;" alt="Dainius Jocas"/><br /><sub><b>Dainius Jocas</b></sub></a><br /><a href="https://github.com/quarkiverse/quarkus-lucene/commits?author=dainiusjocas" title="Code">💻</a> <a href="#maintenance-dainiusjocas" title="Maintenance">🚧</a></td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->
