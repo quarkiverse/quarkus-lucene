@@ -1,6 +1,6 @@
 # Lucene extension for Quarkus
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![Version](https://img.shields.io/maven-central/v/io.quarkiverse.lucene/quarkus-lucene?logo=apache-maven&style=flat-square)](https://search.maven.org/artifact/io.quarkiverse.lucene/quarkus-lucene)
@@ -58,6 +58,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/gustavonalle"><img src="https://avatars.githubusercontent.com/u/440989?v=4?s=100" width="100px;" alt="Gustavo"/><br /><sub><b>Gustavo</b></sub></a><br /><a href="https://github.com/quarkiverse/quarkus-lucene/commits?author=gustavonalle" title="Code">💻</a> <a href="#maintenance-gustavonalle" title="Maintenance">🚧</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.jocas.lt"><img src="https://avatars.githubusercontent.com/u/230044?v=4?s=100" width="100px;" alt="Dainius Jocas"/><br /><sub><b>Dainius Jocas</b></sub></a><br /><a href="https://github.com/quarkiverse/quarkus-lucene/commits?author=dainiusjocas" title="Code">💻</a> <a href="#maintenance-dainiusjocas" title="Maintenance">🚧</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://melloware.com"><img src="https://avatars.githubusercontent.com/u/4399574?v=4?s=100" width="100px;" alt="Melloware"/><br /><sub><b>Melloware</b></sub></a><br /><a href="https://github.com/quarkiverse/quarkus-lucene/commits?author=melloware" title="Documentation">📖</a> <a href="https://github.com/quarkiverse/quarkus-lucene/commits?author=melloware" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
