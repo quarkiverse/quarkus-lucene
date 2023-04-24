@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.apache.lucene.analysis.util.AbstractAnalysisFactory;
 import org.apache.lucene.analysis.util.TokenFilterFactory;
 import org.apache.lucene.analysis.util.TokenizerFactory;
+import org.apache.lucene.index.memory.MemoryIndex;
 import org.apache.lucene.store.BaseDirectory;
 import org.jboss.jandex.ClassInfo;
 import org.jboss.jandex.DotName;
@@ -55,6 +56,9 @@ class LuceneProcessor {
 
         // Directories
         classNames.addAll(collectSubclasses(combinedIndex, BaseDirectory.class.getName()));
+
+        // memory index
+        classNames.add(MemoryIndex.class.getName());
 
         addCtorReflection(reflectiveClass, classNames);
     }
