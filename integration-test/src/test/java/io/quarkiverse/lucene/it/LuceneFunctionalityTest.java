@@ -23,20 +23,8 @@ import io.restassured.RestAssured;
 public class LuceneFunctionalityTest {
 
     @Test
-    @SuppressWarnings("deprecation")
-    public void testRAMDirectory() {
-        testDirectory(org.apache.lucene.store.RAMDirectory.class);
-    }
-
-    @Test
     public void testByteBufferDirectory() {
         testDirectory(ByteBuffersDirectory.class);
-    }
-
-    @Test
-    @SuppressWarnings("deprecation")
-    public void testSimpleFSDirectory() {
-        testDirectory(org.apache.lucene.store.SimpleFSDirectory.class);
     }
 
     @Test

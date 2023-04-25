@@ -1,6 +1,6 @@
-package io.quarkus.lucene.deployment.devui;
+package io.quarkiverse.lucene.deployment.devui;
 
-import org.apache.lucene.analysis.util.TokenizerFactory;
+import org.apache.lucene.analysis.TokenizerFactory;
 
 import io.quarkus.deployment.IsDevelopment;
 import io.quarkus.deployment.annotations.BuildProducer;

@@ -32,19 +32,12 @@ import org.apache.lucene.store.NIOFSDirectory;
  */
 public class LuceneBackend {
 
-    @SuppressWarnings("deprecation")
     Directory createDirectory(Class<?> directory, String folder) throws IOException {
-        if (directory == org.apache.lucene.store.RAMDirectory.class) {
-            return new org.apache.lucene.store.RAMDirectory();
-        }
         if (directory == ByteBuffersDirectory.class) {
             return new ByteBuffersDirectory();
         }
         if (FSDirectory.class.isAssignableFrom(directory)) {
             Path location = Files.createTempDirectory(Paths.get("target"), folder);
-            if (directory == org.apache.lucene.store.SimpleFSDirectory.class) {
-                return new org.apache.lucene.store.SimpleFSDirectory(location.resolve("simple"));
-            }
             if (directory == NIOFSDirectory.class) {
                 return new NIOFSDirectory(location.resolve("nio"));
             }

@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.apache.lucene.analysis.util.AbstractAnalysisFactory;
-import org.apache.lucene.analysis.util.TokenFilterFactory;
-import org.apache.lucene.analysis.util.TokenizerFactory;
+import org.apache.lucene.analysis.AbstractAnalysisFactory;
+import org.apache.lucene.analysis.TokenFilterFactory;
+import org.apache.lucene.analysis.TokenizerFactory;
 import org.apache.lucene.index.memory.MemoryIndex;
 import org.apache.lucene.store.BaseDirectory;
 import org.jboss.jandex.ClassInfo;
@@ -33,7 +33,7 @@ class LuceneProcessor {
     @BuildStep
     void indexTransitiveDependencies(BuildProducer<IndexDependencyBuildItem> index) {
         index.produce(new IndexDependencyBuildItem("org.apache.lucene", "lucene-core"));
-        index.produce(new IndexDependencyBuildItem("org.apache.lucene", "lucene-analyzers-common"));
+        index.produce(new IndexDependencyBuildItem("org.apache.lucene", "lucene-analysis-common"));
         index.produce(new IndexDependencyBuildItem("org.apache.lucene", "lucene-queryparser"));
     }
 
@@ -64,7 +64,7 @@ class LuceneProcessor {
     }
 
     private void addCtorReflection(BuildProducer<ReflectiveClassBuildItem> reflectiveClass, Set<String> classNames) {
-        reflectiveClass.produce(new ReflectiveClassBuildItem(true, false, false, classNames.toArray(new String[0])));
+        reflectiveClass.produce(ReflectiveClassBuildItem.builder(classNames.toArray(new String[0])).constructors(true).build());
     }
 
     private List<String> collectSubclasses(CombinedIndexBuildItem combinedIndex, String className) {
