@@ -1,5 +1,5 @@
 name: quarkus-lucene
-title: Quarkus Lucene
+title: Lucene
 version: dev
 nav:
   - modules/ROOT/nav.adoc
