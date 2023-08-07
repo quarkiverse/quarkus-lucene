@@ -17,8 +17,8 @@
         </dependency>
         <!--GraalVM -->
         <dependency>
-            <groupId>org.graalvm.nativeimage</groupId>
-            <artifactId>svm</artifactId>
+            <groupId>org.graalvm.sdk</groupId>
+            <artifactId>graal-sdk</artifactId>
         </dependency>
         <!-- Lucene dependencies -->
         <dependency>
