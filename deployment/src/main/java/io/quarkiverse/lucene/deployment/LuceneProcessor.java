@@ -19,7 +19,7 @@ import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.CombinedIndexBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.IndexDependencyBuildItem;
-import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.*;
 
 class LuceneProcessor {
 
@@ -63,6 +63,13 @@ class LuceneProcessor {
         addCtorReflection(reflectiveClass, classNames);
     }
 
+    @BuildStep
+    void runtimeClasses(BuildProducer<RuntimeInitializedClassBuildItem> producer) {
+        // We have to initiale the InetAddressPoint at runtime because of the internal usage of java.net.InetAddress.
+        // The Graal-Compiler forces us to do this since newer versions.
+        producer.produce(new RuntimeInitializedClassBuildItem("org.apache.lucene.document.InetAddressPoint"));
+    }
+
     private void addCtorReflection(BuildProducer<ReflectiveClassBuildItem> reflectiveClass, Set<String> classNames) {
         reflectiveClass.produce(ReflectiveClassBuildItem.builder(classNames.toArray(new String[0])).constructors(true).build());
     }
@@ -70,16 +77,6 @@ class LuceneProcessor {
     private List<String> collectSubclasses(CombinedIndexBuildItem combinedIndex, String className) {
         List<String> classes = combinedIndex.getIndex()
                 .getAllKnownSubclasses(DotName.createSimple(className))
-                .stream()
-                .map(ClassInfo::toString)
-                .collect(Collectors.toList());
-        classes.add(className);
-        return classes;
-    }
-
-    private List<String> collectImplementors(CombinedIndexBuildItem combinedIndex, String className) {
-        List<String> classes = combinedIndex.getIndex()
-                .getAllKnownImplementors(DotName.createSimple(className))
                 .stream()
                 .map(ClassInfo::toString)
                 .collect(Collectors.toList());

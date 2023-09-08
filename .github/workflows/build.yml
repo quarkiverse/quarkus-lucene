@@ -56,4 +56,4 @@ jobs:
         run: mvn -B clean install -Dno-format
 
       - name: Build with Maven (Native)
-        run: mvn -B install -Dnative -Dquarkus.native.container-build -Dnative.surefire.skip
+        run: mvn -B install -Pnative -Dnative -Dquarkus.native.container-build
