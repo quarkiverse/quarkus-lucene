@@ -6,9 +6,9 @@
 [![Version](https://img.shields.io/maven-central/v/io.quarkiverse.lucene/quarkus-lucene?logo=apache-maven&style=flat-square)](https://search.maven.org/artifact/io.quarkiverse.lucene/quarkus-lucene)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square)](https://opensource.org/licenses/Apache-2.0)
 
-[Apache Lucene](https://lucene.apache.org/) is a Java library providing powerful indexing and search features, as well as spellchecking, hit highlighting and advanced analysis/tokenization capabilities. 
+[Apache Lucene](https://lucene.apache.org/) is a Java library providing powerful indexing and search features, as well as spellchecking, hit highlighting and advanced analysis/tokenization capabilities.
 
-This extension adds support for native images when using Apache Lucene for both Java 8 and 11 and GraalVM 20.0 and 21.0.
+This extension adds support for building native executables when using Apache Lucene.
 
 ## Usage
 
