@@ -5,7 +5,6 @@ metadata:
     - "query"
     - "index"
     - "full-text"
-  guide: "https://github.com/quarkiverse/quarkus-lucene"
   icon-url: "https://www.apache.org/foundation/press/kit/poweredBy/Apache_PoweredBy.svg"
   categories:
     - "search"
