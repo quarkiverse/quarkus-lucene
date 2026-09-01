@@ -20,7 +20,12 @@ import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.TopScoreDocCollector;
+import org.apache.lucene.search.highlight.Highlighter;
+import org.apache.lucene.search.highlight.InvalidTokenOffsetsException;
+import org.apache.lucene.search.highlight.QueryScorer;
+import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 import org.apache.lucene.store.ByteBuffersDirectory;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -70,6 +75,27 @@ public class LuceneBackend {
         } else {
             directory.close();
         }
+    }
+
+    public List<String> highlight(Directory directory, String queryString)
+            throws IOException, ParseException, InvalidTokenOffsetsException {
+        IndexReader reader = DirectoryReader.open(directory);
+        Analyzer analyzer = new StandardAnalyzer();
+        Query query = new QueryParser("name", analyzer).parse(queryString);
+
+        IndexSearcher searcher = new IndexSearcher(reader);
+        TopDocs topDocs = searcher.search(query, 10);
+        Highlighter highlighter = new Highlighter(new SimpleHTMLFormatter("<b>", "</b>"), new QueryScorer(query));
+
+        List<String> fragments = new ArrayList<>();
+        for (ScoreDoc scoreDoc : topDocs.scoreDocs) {
+            String text = reader.document(scoreDoc.doc).get("name");
+            String fragment = highlighter.getBestFragment(analyzer, "name", text);
+            if (fragment != null) {
+                fragments.add(fragment);
+            }
+        }
+        return fragments;
     }
 
     public List<String> search(Directory directory, String queryString) throws IOException, ParseException {
