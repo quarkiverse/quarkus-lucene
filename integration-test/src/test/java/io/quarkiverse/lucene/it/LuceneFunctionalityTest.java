@@ -58,6 +58,23 @@ public class LuceneFunctionalityTest {
         testQuery("metadata:bat", "Bruce Wayne");
     }
 
+    @Test
+    void testHighlight() {
+        String directoryName = "people";
+
+        createDirectory(directoryName, ByteBuffersDirectory.class);
+
+        Person batman = new PersonBuilder().withName("Bruce Wayne").withAge(45).withMetadata("bats").withHeight(1.8f)
+                .withLatitude(54.2).withLongitude(0.02).getPerson();
+        Person hulk = new PersonBuilder().withName("Bruce Banner").withAge(42).withMetadata("marvel comics").withHeight(2.1f)
+                .withLatitude(32.2).withLongitude(-0.02).getPerson();
+
+        indexPersons(batman, hulk);
+
+        List<String> fragments = highlight("people", "name:bruce");
+        assertThat(fragments, equalTo(Arrays.asList("<b>Bruce</b> Wayne", "<b>Bruce</b> Banner")));
+    }
+
     private void testQuery(String query, String... expectedNames) {
         List<String> names = search("people", query);
         assertThat(names, equalTo(Arrays.asList(expectedNames)));
@@ -102,6 +119,11 @@ public class LuceneFunctionalityTest {
 
     private List<String> search(String indexName, String query) {
         return given().when().get("/lucene/search?q=" + query + "&index=" + indexName).then().statusCode(200)
+                .extract().body().jsonPath().getList("");
+    }
+
+    private List<String> highlight(String indexName, String query) {
+        return given().when().get("/lucene/highlight?q=" + query + "&index=" + indexName).then().statusCode(200)
                 .extract().body().jsonPath().getList("");
     }
 }

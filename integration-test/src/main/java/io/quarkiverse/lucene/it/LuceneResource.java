@@ -16,6 +16,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.search.highlight.InvalidTokenOffsetsException;
 import org.apache.lucene.store.Directory;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.jaxrs.QueryParam;
@@ -92,5 +93,19 @@ public class LuceneResource {
 
         List<String> results = backend.search(directory, queryString);
         return Response.ok().entity(results).build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/highlight")
+    public Response highlight(@QueryParam("q") String queryString, @QueryParam("index") String indexName)
+            throws IOException, ParseException, InvalidTokenOffsetsException {
+        Directory directory = directories.get(indexName);
+        if (directory == null) {
+            return Response.noContent().build();
+        }
+
+        List<String> fragments = backend.highlight(directory, queryString);
+        return Response.ok().entity(fragments).build();
     }
 }
